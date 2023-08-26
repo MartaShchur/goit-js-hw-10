@@ -5,6 +5,10 @@ import './styles.css';
 import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.css';
 
+import axios from "axios";
+
+axios.defaults.headers.common["x-api-key"] = "live_c2vp58LgyS5g8ljIA3yluFIy4vOl1HNEOPZ9uLLOcMAoHfvcGzkdSmRdR0PTOewC";
+
 const ref = {
     selector: document.querySelector('.breed-select'),
     divCatInfo: document.querySelector('.cat-info'),
@@ -38,7 +42,7 @@ function onSelectBreed(evt) {
     selector.classList.add('is-hidden');
     divCatInfo.classList.add('is-hidden');
 
-    const breedId = event.currentTarget.value;
+    const breedId = evt.currentTarget.value;
     fetchCatByBreed(breedId)
     .then(data => {
         loader.classList.replace('loader', 'is-hidden');
