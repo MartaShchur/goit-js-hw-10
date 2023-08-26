@@ -6,7 +6,6 @@ import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.css';
 
 import axios from "axios";
-
 axios.defaults.headers.common["x-api-key"] = "live_c2vp58LgyS5g8ljIA3yluFIy4vOl1HNEOPZ9uLLOcMAoHfvcGzkdSmRdR0PTOewC";
 
 const ref = {
@@ -17,7 +16,9 @@ const ref = {
 };
 const { selector, divCatInfo, loader, error } = ref;
 
-loader.classList.replace('loader', 'is-hidden');
+
+// selector.classList.add('is-hidden');
+loader.classList.replace('is-hidden', 'loader');
 error.classList.add('is-hidden');
 divCatInfo.classList.add('is-hidden');
 
@@ -39,7 +40,7 @@ fetchBreeds()
 
 function onSelectBreed(evt) {
     loader.classList.replace('is-hidden', 'loader');
-    selector.classList.add('is-hidden');
+    selector.classList.add('is-hidden', '.breed-select');
     divCatInfo.classList.add('is-hidden');
 
     const breedId = evt.currentTarget.value;
@@ -47,12 +48,15 @@ function onSelectBreed(evt) {
     .then(data => {
         loader.classList.replace('loader', 'is-hidden');
         selector.classList.remove('is-hidden');
+
         const { url, breeds } = data[0];
         
         divCatInfo.innerHTML = `<div class="box-img"><img src="${url}" alt="${breeds[0].name}" width="400"/></div><div class="box"><h1>${breeds[0].name}</h1><p>${breeds[0].description}</p><p><b>Temperament:</b> ${breeds[0].temperament}</p></div>`
         divCatInfo.classList.remove('is-hidden');
     })
-    .catch((err) => {});
+        .catch((err) => {
+        error.classList.add('is-hidden');
+    });
 };
 
 
