@@ -16,6 +16,7 @@ const ref = {
 const { selector, divCatInfo, loader, p_error } = ref;
 
 divCatInfo.classList.add('is-hidden');
+loader.classList.replace('loader', 'is-hidden');
 
 let arrBreedsId = [];
 
@@ -45,16 +46,17 @@ function displayCatInfo(catData) {
     <div class="box"><h1>${breeds[0].name}</h1>
     <p>${breeds[0].description}</p>
     <p><b>Temperament:</b> ${breeds[0].temperament}</p></div>`;
-
-  loader.classList.replace('loader', 'is-hidden');
+  
   divCatInfo.classList.remove('is-hidden');
+  loader.classList.replace('loader', 'is-hidden');
+ 
 }
 
 function onSelectBreed(evt) {
 
   divCatInfo.classList.add('is-hidden');
-    loader.classList.replace('is-hidden', 'loader');
-    p_error.classList.add('is-hidden');
+  loader.classList.replace('is-hidden', 'loader');
+  p_error.classList.add('is-hidden');
 
   const breedId = evt.currentTarget.value;
 
@@ -70,15 +72,6 @@ function onSelectBreed(evt) {
         }
 
         displayCatInfo(data);
-    //   const { url, breeds } = data[0];
-    //   divCatInfo.innerHTML = `<div class="box-img">
-    //     <img src="${url}" alt="${breeds[0].name}" width="400"/></div>
-    //     <div class="box"><h1>${breeds[0].name}</h1>
-    //     <p>${breeds[0].description}</p>
-    //     <p><b>Temperament:</b> ${breeds[0].temperament}</p></div>`;
-
-    // loader.classList.replace('loader', 'is-hidden');
-    // divCatInfo.classList.remove('is-hidden');
         
     })
       .catch ( (err)=> {
